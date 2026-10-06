@@ -85,22 +85,34 @@ export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [enquirySent, setEnquirySent] = useState(false);
 
-  function sendEnquiry(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const name = String(form.get("name") || "");
-    const phone = String(form.get("phone") || "");
-    const service = String(form.get("service") || "");
-    const message = String(form.get("message") || "");
-    const text = `Hello Kyolex Infosys, I am ${name}.%0APhone: ${phone}%0AService: ${service}%0AMessage: ${message}`;
-    window.open(
-      `https://wa.me/919876543210?text=${text}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
-    setEnquirySent(true);
-    event.currentTarget.reset();
-  }
+ function sendEnquiry(event: React.FormEvent<HTMLFormElement>) {
+  event.preventDefault();
+
+  const form = new FormData(event.currentTarget);
+
+  const name = String(form.get("name") || "");
+  const phone = String(form.get("phone") || "");
+  const service = String(form.get("service") || "");
+  const message = String(form.get("message") || "");
+
+  const text = `Hello Kyolex Infosys,
+
+New Enquiry 🚀
+
+Name: ${name}
+Phone: ${phone}
+Service: ${service}
+Message: ${message}`;
+
+  const whatsappUrl = `https://wa.me/919687300073?text=${encodeURIComponent(
+    text
+  )}`;
+
+  window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+
+  setEnquirySent(true);
+  event.currentTarget.reset();
+}
 
   return (
     <main className="site-shell">
@@ -112,7 +124,7 @@ export default function Page() {
           <span>
             <MapPin size={14} /> Serving businesses across surat city
           </span>
-          <a href="tel:+919876543210">
+          <a href="tel:+919687300073">
             <Phone size={14} /> +91 96873 00073
           </a>
         </div>
@@ -513,7 +525,7 @@ export default function Page() {
               advice? Drop us a line. We're happy to help.
             </p>
             <div className="contact-details">
-              <a href="tel:+919876543210">
+              <a href="tel:+919687300073">
                 <Phone size={18} /> +91 96873 00073
               </a>
               <a href="mailto:kyolexcomputer@gmail.com">
